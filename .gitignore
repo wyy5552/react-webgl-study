@@ -1,0 +1,16 @@
+node_modules/
+npm-debug.log
+/dll/
+/webpack/dll/
+/build/
+/.cache-loader/
+static
+.history
+.idea/
+.vscode
+.yarnclean
+translation-patch.json
+*.bat
+package-lock.json
+yarn-error.log
+*.module.scss.d.ts
