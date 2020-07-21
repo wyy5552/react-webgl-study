@@ -8,7 +8,7 @@ class Vector3 {
         this.z = z ? z : 0;
     }
 }
-class Draw {
+class DrawRect {
     /**
      * 画布
      */
@@ -120,12 +120,12 @@ class Draw {
         this.ctx.moveTo(point.x, point.y)
         point = this.transformCoordinatePoint(...this.mesh[4])
         this.ctx.lineTo(point.x, point.y)
-        point = this.transformCoordinatePoint(...this.mesh[3])
-        this.ctx.lineTo(point.x, point.y)
         point = this.transformCoordinatePoint(...this.mesh[7])
         this.ctx.lineTo(point.x, point.y)
+        point = this.transformCoordinatePoint(...this.mesh[3])
+        this.ctx.lineTo(point.x, point.y)
         this.ctx.stroke()
-        this.ctx.fillStyle="#ff00ff";
+        this.ctx.fillStyle="#ffaaff";
         this.ctx.fill();
         this.ctx.closePath()
         // 绘制直线BF

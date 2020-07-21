@@ -9,9 +9,17 @@
     <canvas id='can' width="600px" height="400px" style="border: 2px solid red;"></canvas>
 </body>
 
-<script src="./main.js"></script>
+<script src="./src/main.js"></script>
+<script src="./src/Wave.js"></script>
 <script>
     let can = document.getElementById("can");
+    // let ctx = new DrawRect(can,600,400);
+    // ctx.setCameraPosition(new Vector3(0,0,300));
+    // ctx.setVertexs([]);
+    // ctx.draw();
+    // ctx.animationFrame();
+    let wave = new Wave(can,600,400);
+    wave.draw();
 </script>
 
 
