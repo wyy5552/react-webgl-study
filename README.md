@@ -1,6 +1,6 @@
-#React入门文档
+# React入门文档
 
-##1.安装环境
+## 1.安装环境
 ```
 $ npm install -g cnpm --registry=https://registry.npm.taobao.org
 $ npm config set registry https://registry.npm.taobao.org
@@ -10,7 +10,7 @@ $ cd my-app/
 $ npm start
 ```
 
-#2.Hello world
+# 2.Hello world
 
 打开App.js，里面返回的是首页结构
 ```javascript
@@ -34,13 +34,13 @@ function App() {
 export default App;
 ```
 
-##3.生命周期
+## 3.生命周期
 
-###组件的生命周期可分成三个状态：
+### 组件的生命周期可分成三个状态：
  * Mounting：已插入真实 DOM
  * Updating：正在被重新渲染
  * Unmounting：已移出真实 DOM
-###生命周期的方法有：
+### 生命周期的方法有：
 
 * componentWillMount 在渲染前调用,在客户端也在服务端。
 * componentDidMount : 在第一次渲染后调用，只在客户端。之后组件已经生成了对应的DOM结构，可以通过this.getDOMNode()来进行访问。 如果你想和其他JavaScript框架一起使用，可以在这个方法中调用setTimeout, setInterval或者发送AJAX请求等操作(防止异步操作阻塞UI)。
@@ -51,7 +51,7 @@ export default App;
 * componentDidUpdate 在组件完成更新后立即调用。在初始化时不会被调用。
 * componentWillUnmount在组件从 DOM 中移除之前立刻被调用。
 
-##4.新建页面
+## 4.新建页面
 ```
 import React, { Component } from 'react';
 import './FirstPage.css';
