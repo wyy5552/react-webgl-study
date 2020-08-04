@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>标准的webgl程序</title>
+</head>
+
+<body>
+    <canvas id='webgl'></canvas>
+    <script>
+        //顶点着色器程序
+        var VSHADER_SOURCE =
+            'void main() {\n' +
+            'gl_Position = vec4(0.0, 0.0, 0.0, 1);\n' + //设置坐标
+            'gl_PointSize = 100.0;\n' + //设置尺寸
+            '}\n';
+
+        //片元着色器程序
+        var FSHADER_SOURCE =
+            'void main(){\n' +
+            'gl_FragColor = vec4(1.0, 0.0, 0.0, 1.0);\n' + //设置颜色
+            '}\n';
+        //获取canvas
+        var canvas = document.getElementById('webgl');
+        //获取webgl窗口
+        var gl = canvas.getContext('webgl');
+        //===========加载着色器===============
+        //加载顶点着色器
+        var v_shader = gl.createShader(gl.VERTEX_SHADER);
+        //错误判断 
+        if (v_shader == null) {
+            console.log('unable to create shader');
+        }
+
+        //设置数据来源
+        gl.shaderSource(v_shader, VSHADER_SOURCE);
+        //编译shader
+        gl.compileShader(v_shader);
+        //判断是否编译成功
+        var compiled = gl.getShaderParameter(v_shader, gl.COMPILE_STATUS);
+        if (!compiled) {
+            var error = gl.getShaderInfoLog(v_shader);
+            console.log('Failed to compile v_shader: ' + error);
+            gl.deleteShader(v_shader);
+        }
+        //创建片段shader
+        var f_shader = gl.createShader(gl.FRAGMENT_SHADER);
+        gl.shaderSource(f_shader, FSHADER_SOURCE);
+        gl.compileShader(f_shader);
+
+        //========end=========
+
+        //========创建编译器程序========
+        var program = gl.createProgram();
+        //将着色器绑定到程序中
+        gl.attachShader(program, v_shader);
+        gl.attachShader(program, f_shader);
+        //将程序与gl链接
+        gl.linkProgram(program);
+        // 检查链接状态
+        var linked = gl.getProgramParameter(program, gl.LINK_STATUS);
+        if (!linked) {
+            var error = gl.getProgramInfoLog(program);
+            console.log('Failed to link program: ' + error);
+            gl.deleteProgram(program);
+            gl.deleteShader(fragmentShader);
+            gl.deleteShader(vertexShader);
+        }
+        //webgl应用程序
+        gl.useProgram(program);
+        gl.program = program;
+        //=========end============
+        //使用黑色清空屏幕
+        gl.clearColor(0.0, 0.0, 0.0, 1.0);
+        gl.clear(gl.COLOR_BUFFER_BIT);
+        //将点绘制到gl窗口
+        gl.drawArrays(gl.POINTS, 0, 1);
+
+        
+    </script>
+</body>
+
+</html>
