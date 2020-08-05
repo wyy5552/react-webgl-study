@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>测试webgl</title>
+    </head>
+    <body>
+        <canvas id='webgl'></canvas>
+        <script>
+            var v_source = `
+                void main(){
+                    gl_Position = vec4(0.0,0.0,0.0,1);
+                    gl_PositionSize = 10.0;
+                }
+            `;
+            var f_source = `
+                void main(){
+                    gl_FragColor = vec4(1.0,0.0,0.0,1.0);
+                }
+            `;
+            var canvas = document.getElementById('webgl');
+            var gl = canvas.getContext('webgl');
+
+            //着色器，创建，附源，编译
+            var v_shader = gl.createShader(gl.VERTEXT_SHADER);
+            gl.shaderSource(v_shader,v_source);
+            gl.compileShader(v_shader);
+
+            var f_shader = gl.createShader(gl.FRAGMENT_SHADER);
+            gl.shaderSource(f_shader,f_source);
+            gl.compileShader(f_shader);
+
+            //创建程序编译
+            var program = gl.createProgram();
+            gl.attachShader(program, v_shader);
+            gl.attachShader(program, f_shader);
+
+            gl.linkProgram(program);
+
+            gl.useProgram(program);
+            gl.program = program;
+
+            gl.clearColor(0.0,0.0,0.0,1.0);
+            gl.clear(gl.COLOR_BUFFER_BIT);
+            gl.drawArrays(gl.POINT, 0, 1);
+
+            canvas.onmousedown = (e)=>{
+
+            }
+        </script>
+    </body>
+</html>
