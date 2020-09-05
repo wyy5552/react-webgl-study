@@ -8,7 +8,7 @@ var VSHADER_SOURCE =
     'varying vec4 v_Color;\n' +
     'void main() {\n' +
     'gl_Position = a_Position;\n' +
-    'gl_PointSize = 10.0;\n' +
+    'gl_PointSize = 20.0;\n' +
     'v_Color = a_Color;\n' +
     '}\n';
 
