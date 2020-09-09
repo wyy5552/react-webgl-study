@@ -52,7 +52,7 @@ function main() {
     gl.clear(gl.COLOR_BUFFER_BIT);
 
     //绘制三个点
-    gl.drawArrays(gl.POINTS, 0, n);
+    gl.drawArrays(gl.LINES, 0, n);
 }
 
 function initVertexBuffers(gl) {
