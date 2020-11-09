@@ -107,9 +107,41 @@
             size: 5.0//点对象像素尺寸
         });//材质对象
         var mesh = new THREE.Mesh(geometry, material);
+        // scene.add(mesh);
+
+// 矩形嵌套矩形或圆弧
+
+
+// 一个外轮廓圆弧嵌套三个内圆弧轮廓
+var shape = new THREE.Shape(); //Shape对象
+//外轮廓
+shape.arc(0, 0, 100, 0, 2 * Math.PI);
+// 内轮廓1
+var path1 = new THREE.Path();
+path1.arc(0, 0, 40, 0, 2 * Math.PI);
+// 内轮廓2
+var path2 = new THREE.Path();
+path2.arc(80, 0, 10, 0, 2 * Math.PI);
+// 内轮廓3
+var path3 = new THREE.Path();
+path3.arc(-80, 0, 10, 0, 2 * Math.PI);
+//三个内轮廓分别插入到holes属性中
+shape.holes.push(path1, path2, path3);
+var geometry = new THREE.ExtrudeGeometry(//拉伸造型
+    shape,//二维轮廓
+    //拉伸参数
+    {
+        amount:120,//拉伸长度
+        bevelEnabled:false//无倒角
+    }
+    );
+
+var material = new THREE.PointsMaterial({
+            color: 0x0000ff,
+            size: 5.0//点对象像素尺寸
+        });//材质对象
+        var mesh = new THREE.Mesh(geometry, material);
         scene.add(mesh);
-
-
     </script>
 </body>
 

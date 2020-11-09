@@ -75,31 +75,34 @@
         scene.add(grid);
     </script>
     <script>
-        var geometry = new THREE.PlaneGeometry(128, 128); //矩形平面
-        /**
-         * 创建纹理对象的像素数据
-         */
-        var width = 32; //纹理宽度
-        var height = 32; //纹理高度
-        var size = width * height; //像素大小
-        var data = new Uint8Array(size * 3); //size*3：像素在缓冲区占用空间
-        for (let i = 0; i < size * 3; i += 3) {
-            // 随机设置RGB分量的值
-            data[i] = 255 * Math.random()
-            data[i + 1] = 255 * Math.random()
-            data[i + 2] = 255 * Math.random()
-        }
-        // 创建数据文理对象   RGB格式：THREE.RGBFormat
-        var texture = new THREE.DataTexture(data, width, height, THREE.RGBFormat);
-        texture.needsUpdate = true; //纹理更新
-        //打印纹理对象的image属性
-        // console.log(texture.image);
+        // 纹理贴图映射到一个矩形平面上
+        var geometry = new THREE.PlaneGeometry(204, 102, 4, 4); //矩形平面
+        // TextureLoader创建一个纹理加载器对象，可以加载图片作为几何体纹理
+        var textureLoader = new THREE.TextureLoader();
+        // 执行load方法，加载纹理贴图成功后，返回一个纹理对象Texture
+        textureLoader.load('Earth.png', function (texture) {
+            var material = new THREE.MeshLambertMaterial({
+                // color: 0x0000ff,
+                // 设置颜色纹理贴图：Texture对象作为材质map属性的属性值
+                map: texture,//设置颜色贴图属性值
+                side:THREE.DoubleSide,
+            }); //材质对象Material
+            var mesh = new THREE.Mesh(geometry, material); //网格模型对象Mesh
+            scene.add(mesh); //网格模型添加到场景中
 
-        var material = new THREE.MeshPhongMaterial({
-            map: texture, // 设置纹理贴图
-        }); //材质对象Material
-        var mesh = new THREE.Mesh(geometry, material);
-        scene.add(mesh);
+            //纹理贴图加载成功后，调用渲染函数执行渲染操作
+            // render();
+            var t0 = new THREE.Vector2(0, 1); //图片左下角
+            var t1 = new THREE.Vector2(0, 0); //图片右下角
+            var t2 = new THREE.Vector2(1, 0); //图片右上角
+            var t3 = new THREE.Vector2(1, 1); //图片左上角
+            var uv1 = [t0, t1, t3]; //选中图片一个三角区域像素——用于映射到一个三角面
+            var uv2 = [t1, t2, t3]; //选中图片一个三角区域像素——用于映射到一个三角面
+            // 设置第五、第六个三角形面对应的纹理坐标
+            geometry.faceVertexUvs[0][4] = uv1
+            geometry.faceVertexUvs[0][5] = uv2
+        })
+
     </script>
 </body>
 

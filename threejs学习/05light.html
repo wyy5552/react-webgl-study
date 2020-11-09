@@ -57,6 +57,7 @@
         scene.add(axisHelper);
         // console.log(scene)
         render();
+        renderer.shadowMap.enabled = true;
         var controls = new THREE.OrbitControls(camera, renderer.domElement);//创建控件对象
         controls.addEventListener('change', render);//监听鼠标、键盘事件
         // var grid = new THREE.GridHelper(1000, 100, 0x000000, 0x000000);
