@@ -137,7 +137,7 @@ function initTextures(gl, n) {
     };
 
     //浏览器开始加载图像
-    image.src = '../resources/sky.jpg';
+    image.src = './sky.jpg';
 
     return true;
 }
